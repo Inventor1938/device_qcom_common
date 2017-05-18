@@ -12,6 +12,15 @@ PRODUCT_AAPT_CONFIG += hdpi mdpi
 
 PRODUCT_MANUFACTURER := QUALCOMM
 
+ifneq ($(HOST_OS),linux)
+$(warning ****************************************************************)
+$(warning * SDCLANG is not supported on non-linux hosts. Disabling...)
+$(warning ****************************************************************)
+else
+# include definitions for SDCLANG
+include device/qcom/common/sdclang/sdclang.mk
+endif
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so \
     persist.radio.apm_sim_not_pwdn=1 \
